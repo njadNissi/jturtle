@@ -17,6 +17,7 @@ public class DrawingSheet extends JPanel implements ActionListener {
     private final Color BG;
     private final int W, H;
     public int penSize = 3;
+    public boolean showTurle = true;
 
     public DrawingSheet(int width, int height, Color bg){
         W = width;
@@ -54,7 +55,7 @@ public class DrawingSheet extends JPanel implements ActionListener {
         super.paint(g);
 
         g.drawImage(img, 0, 0, this);
-        drawTurtle(g, cp);
+        if(showTurle) drawTurtle(g, cp);
 
 //        g.dispose();
     }

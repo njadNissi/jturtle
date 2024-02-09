@@ -32,12 +32,12 @@ public class Turtle implements Drawer{
 
     @Override
     public void showTurtle() {
-        this.cmds.add("TURTLE true");
+        sheet.showTurle = true;
     }
 
     @Override
     public void hideTurtle() {
-        this.cmds.add("TURTLE false");
+        sheet.showTurle = false;
     }
 
     @Override
