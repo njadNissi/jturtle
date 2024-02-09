@@ -97,7 +97,7 @@ public class Turtle implements Drawer{
 
     @Override
     public void setDrawingSpeed(int speed) {
-        sheet.timer.setDelay(1000 / speed);
+        sheet.timer.setDelay(100 / speed);
     }
 
     @Override
@@ -122,17 +122,21 @@ public class Turtle implements Drawer{
     @Override
     public void circle(int radius) {
         Point c = new Point();//center
-        switch (dir) {
+    /*    switch (dir) {
             case RIGHT -> { // facing up before
                 c.setLocation(cp.x, cp.y - radius);
             }
-            case DOWN -> {
+            case DOWN -> { // facing
                 c.setLocation(cp.x, cp.y - radius);
             }
             case LEFT -> {
                 System.out.println();
             }
         }
+
+*/
+        c.setLocation(cp.x, cp.y - radius);
+
         path.addAll(Shape.getCirclePoints(c, radius));
     }
 

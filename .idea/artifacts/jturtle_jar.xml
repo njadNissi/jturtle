@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jturtle:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jturtle_jar</output-path>
+    <root id="archive" name="jturtle.jar">
+      <element id="module-output" name="jturtle" />
+      <element id="module-test-output" name="jturtle" />
+    </root>
+  </artifact>
+</component>
