@@ -15,7 +15,9 @@ public interface Drawer {
     public void forward(int distance);
     public void backward(int distance);
     public void setDrawingSpeed(int speed);
+    public void setPenSize(int size);
     public void right(double angle);
     public void left(double angle);
+    public void circle(int radius);
 
 }

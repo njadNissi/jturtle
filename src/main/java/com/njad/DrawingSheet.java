@@ -9,20 +9,21 @@ import java.util.LinkedList;
 
 public class DrawingSheet extends JPanel implements ActionListener {
     private LinkedList<Point> path;
-    private final int delay = 100; // speed=10
+    private final int DELAY = 10; // speed=10
     public Timer timer;
     private BufferedImage img;
     private Graphics G;
     private Point cp;
-    private Color BG;
+    private final Color BG;
     private final int W, H;
+    public int penSize = 3;
 
     public DrawingSheet(int width, int height, Color bg){
         W = width;
         H = height;
         BG = bg;
         initImg();
-        this.timer = new Timer(delay, this);
+        this.timer = new Timer(DELAY, this);
     }
 
     public void setPath(LinkedList<Point> path){
@@ -38,10 +39,10 @@ public class DrawingSheet extends JPanel implements ActionListener {
     }
 
     void drawTurtle(Graphics g, Point p){
-        g.setColor(Color.BLACK);
+        g.setColor(Color.YELLOW);
         int size = 10;
         for (int i = -size; i <= size; i++) {
-            if(i > 0) // all the xcoords are on the back
+            if(i > 0) // all the x coordinates are on the back
                 g.fillOval(p.x - i, p.y + i/2, 3, 3);
             else
                 g.fillOval(p.x + i, p.y + i/2, 3, 3);
@@ -67,10 +68,10 @@ public class DrawingSheet extends JPanel implements ActionListener {
 
         G.setColor(Color.BLACK);
         cp = path.removeFirst();
-        G.fillOval(cp.x, cp.y, 2, 2);
+        G.fillOval(cp.x, cp.y, penSize, penSize);
+//        G.drawString(cp.x + ":"+cp.y, cp.x, cp.y - 10);
 
         repaint();
     }
-
 
 }
