@@ -2,8 +2,6 @@ package com.njad;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
-import com.njad.Heading;
 
 import static com.njad.Heading.*;
 import static java.lang.Math.*;
@@ -12,32 +10,29 @@ public class Turtle implements Drawer{
     public static int W=500, H=500;
     public JFrame screen;
     private DrawingSheet sheet;
-    private final LinkedList<String> cmds;
-    private final LinkedList<Point> path;
     private Point cp;//currentPt
     private Heading dir = RIGHT, side = RIGHT; // motion direction
     private double angle = 0;
-    private int lineNumOfPts = 75;
+    private int LINE_NO_POINTS = 75;
+    private int count = 0;
 
     public Turtle(int sceneW, int sceneH){
         W = sceneW;
         H = sceneH;
         this.screen = new JFrame();
         sheet = new DrawingSheet(W, H, Color.WHITE);
-        this.cmds = new LinkedList<>();
-        this.path = new LinkedList<>();
         this.screen.setSize(W, H);
         this.cp = new Point(W/2, W/2);
     }
 
     @Override
     public void showTurtle() {
-        sheet.showTurle = true;
+        sheet.showTurtle = true;
     }
 
     @Override
     public void hideTurtle() {
-        sheet.showTurle = false;
+        sheet.showTurtle = false;
     }
 
     @Override
@@ -73,7 +68,7 @@ public class Turtle implements Drawer{
         int Y = (int)(distance * sin(angle) + cp.y);
         fp.setLocation(X, Y);
 
-        path.addAll(Shape.getLinePoints(cp, fp, lineNumOfPts));
+        sheet.path.addAll(Shape.getLinePoints(cp, fp, LINE_NO_POINTS));
 
         cp = fp;
     }
@@ -96,7 +91,7 @@ public class Turtle implements Drawer{
     }
 
     @Override
-    public void setDrawingSpeed(int speed) {
+    public void setSpeed(int speed) {
         sheet.timer.setDelay(100 / speed);
     }
 
@@ -137,11 +132,27 @@ public class Turtle implements Drawer{
 */
         c.setLocation(cp.x, cp.y - radius);
 
-        path.addAll(Shape.getCirclePoints(c, radius));
+        sheet.path.addAll(Shape.getCirclePoints(c, radius));
+    }
+
+    @Override
+    public void setColor(Color c) { // outline color
+        //add a point p with p.x = -MIN_VALUE, p.y=color for outline. p.x= MAX_VALUE and p.y=color for fill
+        // the color is not saved inn the path but the p.y is the index of that color in colors list.
+        sheet.path.add(new Point(Integer.MIN_VALUE, count++));
+        sheet.colors.add(c);
+    }
+
+    @Override
+    public void fill(Color c) {
+        //add a point p with p.x = -MIN_VALUE, p.y=color for outline. p.x= MAX_VALUE and p.y=color for fill
+        // the color is not saved inn the path but the p.y is the index of that color in colors list.
+        sheet.path.add(new Point(Integer.MAX_VALUE, count++));
+        sheet.colors.add(c);
     }
 
     public void run(){
-        this.sheet.setPath(path);
+//        this.sheet.setPath(path);
         this.screen.add(sheet);
         this.screen.setVisible(true);
         sheet.timer.start();

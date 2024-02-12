@@ -14,10 +14,12 @@ public interface Drawer {
     * returns the current position*/
     public void forward(int distance);
     public void backward(int distance);
-    public void setDrawingSpeed(int speed);
+    public void setSpeed(int speed);
     public void setPenSize(int size);
     public void right(double angle);
     public void left(double angle);
     public void circle(int radius);
+    public void setColor(Color c);
+    public void fill(Color c);
 
 }
